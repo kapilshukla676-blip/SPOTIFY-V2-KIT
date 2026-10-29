@@ -1,4 +1,9 @@
 name: Build LKM for KernelSU
+permissions:
+  actions: write
+  contents: write
+  packages: read
+
 on:
   workflow_call:
     inputs:

@@ -1,5 +1,10 @@
 name: Build Manager
 
+permissions:
+  actions: write
+  contents: write
+  packages: read
+
 on:
   push:
     branches: [ "main", "dev", "ci", "master" ]
@@ -100,16 +105,18 @@ jobs:
     needs: generate-key
     uses: ./.github/workflows/build-lkm.yml
     with:
-      expected_size: ${{ needs.generate-key.outputs.expected_size || '' }}
-      expected_hash: ${{ needs.generate-key.outputs.expected_hash || '' }}
+      package_name: com.spotify.music
+      expected_size: '0x36f'
+      expected_hash: 'd85c803ce7fbc7d64faf295e726df403cd0ed70c192890622542890b53779359'
     secrets: inherit
 
   build-xx-lkm:
     needs: generate-key
     uses: ./.github/workflows/build-xx-lkm.yml
     with:
-      expected_size: ${{ needs.generate-key.outputs.expected_size || '' }}
-      expected_hash: ${{ needs.generate-key.outputs.expected_hash || '' }}
+      package_name: com.spotify.music
+      expected_size: '0x36f'
+      expected_hash: 'd85c803ce7fbc7d64faf295e726df403cd0ed70c192890622542890b53779359'
     secrets: inherit
 
   build-ksuinit:

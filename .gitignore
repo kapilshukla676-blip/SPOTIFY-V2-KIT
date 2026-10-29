@@ -9,3 +9,10 @@ __pycache__
 /dist
 /repack-config.json
 /userspace/ksud/.lkm_image_bootstrap.o
+
+# keystore - private signing material
+*.keystore
+*.jks
+*.crt
+*.der
+spotify_b64.txt

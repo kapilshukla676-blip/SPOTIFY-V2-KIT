@@ -93,6 +93,7 @@ import me.weishu.kernelsu.ui.screen.superuser.SuperUserPager
 import me.weishu.kernelsu.ui.screen.template.AppProfileTemplateScreen
 import me.weishu.kernelsu.ui.screen.templateeditor.TemplateEditorScreen
 import me.weishu.kernelsu.ui.theme.KernelSUTheme
+import me.weishu.kernelsu.license.LicenseGate
 import me.weishu.kernelsu.ui.theme.LocalClassicUi
 import me.weishu.kernelsu.ui.theme.LocalColorMode
 import me.weishu.kernelsu.ui.theme.LocalEnableBlur
@@ -192,6 +193,8 @@ open class MainActivity : ComponentActivity() {
                 LocalClassicUi provides appSettings.classicUi
             ) {
                 KernelSUTheme(appSettings = appSettings, uiMode = uiMode) {
+                    SideEffect { contentReady = true }
+                    LicenseGate(onValid = {}) {
                     IntentDispatcher(intentChannel = intentChannel)
                     val swipeDismiss = if (uiState.enableSwipeDismiss) {
                         if (LocalLayoutDirection.current == androidx.compose.ui.unit.LayoutDirection.Rtl) {
@@ -280,7 +283,7 @@ open class MainActivity : ComponentActivity() {
 
                         UiMode.Miuix -> Scaffold { navDisplay() }
                     }
-                    SideEffect { contentReady = true }
+                    }
                 }
             }
         }
